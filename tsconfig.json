@@ -7,8 +7,12 @@
         "strict": true,
         "baseUrl": "./"
     },
+    "include": [
+        "src/commands/*.ts"
+    ],
     "files": [
-        "src/index.ts"
+        "src/index.ts",
+        "src/utils.ts"
     ],
     "exclude": [
         "node_modules",
