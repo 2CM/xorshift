@@ -1,4 +1,5 @@
 import Discord = require("discord.js");
+import DiscordVoice = require("@discordjs/voice");
 import {Command} from "../Command";
 import * as Utils from "../Utils";
 
@@ -19,10 +20,31 @@ var cmd: Command = {
         if(!interaction.isCommand()) return;
 
         //find what channel the user is in
+        var guildMember = await Utils.getInteractionGuildMember(interaction);
+        var channel = guildMember.voice.channel;
 
-        var sender = await Utils.getInteractionGuildMember(interaction);
-        interaction.reply(`you are in ${sender.voice.channel?.name}`);
-    }
+        if(!channel) {
+            interaction.reply("join a vc first");
+            return -1;
+        }
+
+
+        //join user vc if needed
+        if(!interaction.guild) return Utils.error(interaction, "somehow couldnt find interaction guild");
+
+        var connection = DiscordVoice.getVoiceConnection(interaction.guild?.id);
+
+        if(!connection) {
+            //interaction.reply(`joining vc #${channel?.name}`);
+
+            connection = DiscordVoice.joinVoiceChannel({
+                channelId: channel?.id,
+                guildId: interaction.guild?.id || "",
+                adapterCreator: interaction.guild?.voiceAdapterCreator,
+            });
+        }
+    },
+
 }
 
 module.exports = cmd;

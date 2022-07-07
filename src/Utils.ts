@@ -7,3 +7,12 @@ export async function getInteractionGuildMember(interaction: Discord.Interaction
         })
     });
 }
+
+export function error(interaction: Discord.Interaction<Discord.CacheType>, message: string) {
+    var errorString = "ERROR: "+message;
+
+    interaction.channel?.send(errorString);
+    console.log(`error while executing an interaction: ${errorString}`);
+
+    return -1;
+}
