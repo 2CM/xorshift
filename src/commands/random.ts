@@ -8,14 +8,14 @@ var cmd: Command = {
         options: [
             {
                 name: "min",
-                description: "minimum number",
-                required: true,
+                description: "minimum number (default 1)",
+                required: false,
                 type: Discord.Constants.ApplicationCommandOptionTypes.NUMBER
             },
             {
                 name: "max",
-                description: "maximum number",
-                required: true,
+                description: "maximum number (default 10)",
+                required: false,
                 type: Discord.Constants.ApplicationCommandOptionTypes.NUMBER
             },
             {
@@ -37,10 +37,10 @@ var cmd: Command = {
         
         var options = interaction.options;
 
-        var min = options.getNumber("min") || 0;
-        var max = options.getNumber("max") || 1;
+        var min = options.getNumber("min") || 1;
+        var max = options.getNumber("max") || 10;
         var count = options.getNumber("count") || 1;
-        var decimal = options.getNumber("decimal") || false;
+        var decimal = options.getBoolean("decimal") || false;
 
         var replyString = "";
 

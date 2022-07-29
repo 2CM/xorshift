@@ -18,8 +18,30 @@ var cmds = new Map<String, Command>();
 client.once("ready", () => {
     console.log("bot online at "+new Date());
 
-    const guildId = dotenv.guildId;
-    var guild = client.guilds.cache.get(guildId);
+    var guilds = client.guilds.cache;
+
+    //load all commands into cmds
+    var commandDir = fs.readdirSync(path.join(__dirname, "/commands"));
+
+    commandDir.forEach((cmdFileName: string) => {
+        let name = cmdFileName.slice(0,-3)
+
+        let cmdInfo: Command = require("./commands/"+cmdFileName);
+
+        cmds.set(name, cmdInfo);
+
+        guilds.forEach(guild => {
+            var commands: any;
+
+            if(guild) {
+                commands = guild.commands;
+            } else {
+                commands = client.application?.commands;
+            }
+        
+            commands?.create(cmdInfo.info);
+        })
+    });
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -39,31 +61,12 @@ client.on("messageCreate", (message) => {
         message.reply(">:(\n-iain");
     }
 
-    if(message.content == "owo init commands") {
+    /*
+    //to init commands in message's server
+    if(message.content == "owo init commands" && message.author.id == dotenv.adminId) {
         message.reply("owo")
-
-        var guild = message.guild;
-
-        var commands: any;
-
-        if(guild) {
-            commands = guild.commands;
-        } else {
-            commands = client.application?.commands;
-        }
-
-        var commandDir = fs.readdirSync(path.join(__dirname, "/commands"));
-
-        commandDir.forEach((cmdFileName: string) => {
-            let name = cmdFileName.slice(0,-3)
-
-            let cmdInfo: Command = require("./commands/"+cmdFileName);
-
-            commands?.create(cmdInfo.info);
-
-            cmds.set(name, cmdInfo);
-        });
     }
+    */
 })
 
 client.login(dotenv.token);
