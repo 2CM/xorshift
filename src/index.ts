@@ -48,6 +48,7 @@ client.on("interactionCreate", async (interaction) => {
     if(interaction.isCommand()) {
         var { commandName, options} = interaction;
 
+        console.log(`${interaction.user.username} used ${commandName}`);
         var running = cmds.get(commandName)?.run(interaction,client);
     } else if(interaction.isButton()) {
         

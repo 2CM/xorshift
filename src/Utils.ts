@@ -1,5 +1,6 @@
 import Discord = require("discord.js");
 
+//get GuildMember who created an interaction
 export async function getInteractionGuildMember(interaction: Discord.Interaction<Discord.CacheType>): Promise<Discord.GuildMember> {
     return new Promise((resolve, reject) => {
         interaction.guild?.members.fetch(interaction.user).then(gulidMember => {
@@ -8,6 +9,7 @@ export async function getInteractionGuildMember(interaction: Discord.Interaction
     });
 }
 
+//get guildMember from User
 export async function getGuildMember(guild: Discord.Guild, user: Discord.User): Promise<Discord.GuildMember> {
     return new Promise((resolve, reject) => {
         guild?.members.fetch(user).then(gulidMember => {
@@ -16,6 +18,7 @@ export async function getGuildMember(guild: Discord.Guild, user: Discord.User): 
     });
 }
 
+//for discord commands
 export function error(interaction: Discord.Interaction<Discord.CacheType>, message: string) {
     var errorString = "ERROR: "+message;
 
@@ -25,6 +28,7 @@ export function error(interaction: Discord.Interaction<Discord.CacheType>, messa
     return -1;
 }
 
+//compare multiple values
 export function multiEquals(...args: any): boolean {
     if(args.length < 2) throw new Error("need at least 2 arguments for multiEquals()");
 
@@ -33,4 +37,9 @@ export function multiEquals(...args: any): boolean {
     }
 
     return true;
+}
+
+//convert letter to discord emoji
+export function letterToEmoji(letter: string): string {
+    return `:regional_indicator_${letter.toLowerCase()}:`;
 }

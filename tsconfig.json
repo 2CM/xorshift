@@ -1,15 +1,16 @@
 {
     "compilerOptions": {
-        "target": "ES6",
+        "target": "ESNext",
         "module": "commonjs",
         "rootDir": "./src/",
         "outDir": "./dist/",
         "strict": true,
         "esModuleInterop": true,
-        "baseUrl": "./"
+        "baseUrl": "./",
     },
     "include": [
-        "src/commands/*.ts"
+        "src/commands/*.ts",
+        "src/other/*"
     ],
     "files": [
         "src/index.ts",
