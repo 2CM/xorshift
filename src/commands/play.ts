@@ -41,6 +41,8 @@ var cmd: Command = {
                 channelId: channel?.id,
                 guildId: interaction.guild?.id || "",
                 adapterCreator: interaction.guild?.voiceAdapterCreator,
+                selfDeaf: false,
+                selfMute: false,
             });
         }
     },

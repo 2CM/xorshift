@@ -11,6 +11,11 @@
   "dependencies": {
     "@discordjs/voice": "^0.10.0",
     "discord.js": "^13.8.1",
+    "https": "^1.0.0",
+    "request": "^2.88.2",
     "ts-node": "^10.8.2"
+  },
+  "devDependencies": {
+    "@types/request": "^2.48.8"
   }
 }

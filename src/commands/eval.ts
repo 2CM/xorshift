@@ -15,7 +15,7 @@ var cmd: Command = {
             }
         ]
     },
-    run: function(interaction: Discord.Interaction<Discord.CacheType>) {
+    run: async function(interaction: Discord.Interaction<Discord.CacheType>, client: Discord.Client) {
         if(!interaction.isCommand()) return;
         if(interaction.user.id != "467109079865884674") return;
 
@@ -24,6 +24,8 @@ var cmd: Command = {
         var options = interaction.options;
         
         try {
+            //client.users.fetch("user").then(user => user.send("hi ;"));
+
             eval(options.getString("string") || "");
 
             console.log("eval'd "+options.getString("string"));

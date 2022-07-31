@@ -85,7 +85,7 @@ var cmd: Command = {
                 if(guess.content.length != answer.length && guess.author.id == interaction.user.id) {
                     var reply = await guess.reply(`guess needs to be ${answer.length} letters long (3s)`);
 
-                    setTimeout(async () => {await reply.delete(); await guess.delete()}, 3000);
+                    setTimeout(async () => {await reply?.delete(); await guess?.delete()}, 3000);
 
                     messageValid = false;
                 }
@@ -93,7 +93,7 @@ var cmd: Command = {
                 if((!wordleWords.setBe.has(guess.content) && !wordleWords.setHe.has(guess.content)) && guess.content.length == answer.length && guess.author.id == interaction.user.id) {
                     var reply = await guess.reply(`not a valid word (3s)`);
 
-                    setTimeout(async () => {await reply.delete(); await guess.delete()}, 3000);
+                    setTimeout(async () => {await reply?.delete(); await guess?.delete()}, 3000);
 
                     messageValid = false;
                 }
@@ -115,7 +115,8 @@ var cmd: Command = {
                 //console.log(guessFeedback);
                 //guess.channel.send(guessFeedback.map(value => feedbackIcons[value]).join(" "));
 
-                await guess.delete();
+                await guess?.delete();
+                
                 await boardMessage?.edit({embeds: [boardToEmbed()]});
 
                 if(guessFeedback.join("") == "1".repeat(answer.length)) {
