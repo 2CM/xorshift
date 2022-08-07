@@ -2,6 +2,7 @@ import fs = require("fs");
 import Discord = require("discord.js");
 import path = require("path");
 import {Command} from "./Command";
+import * as messageFilter from "./messageFilter";
 
 var dotenv = JSON.parse(fs.readFileSync("./.env", "utf8"));
 
@@ -58,9 +59,13 @@ client.on("interactionCreate", async (interaction) => {
 client.on("messageCreate", (message) => {
     if(message.author.bot) return;
 
+    /*
     if(message.content.includes(">play star spangled banner")) { //dont ask
         message.reply(">:(\n-iain");
     }
+    */
+
+    messageFilter.filterMessage(message);
 
     /*
     //to init commands in message's server

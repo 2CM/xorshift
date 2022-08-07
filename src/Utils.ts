@@ -28,6 +28,13 @@ export function error(interaction: Discord.Interaction<Discord.CacheType>, messa
     return -1;
 }
 
+//convert letter to discord emoji
+export function letterToEmoji(letter: string): string {
+    return `:regional_indicator_${letter.toLowerCase()}:`;
+}
+
+
+
 //compare multiple values
 export function multiEquals(...args: any): boolean {
     if(args.length < 2) throw new Error("need at least 2 arguments for multiEquals()");
@@ -39,7 +46,7 @@ export function multiEquals(...args: any): boolean {
     return true;
 }
 
-//convert letter to discord emoji
-export function letterToEmoji(letter: string): string {
-    return `:regional_indicator_${letter.toLowerCase()}:`;
+//
+export function randomlySelect(...args: any): any {
+    return args[Math.round(Math.random()*args.length)];
 }
