@@ -48,5 +48,5 @@ export function multiEquals(...args: any): boolean {
 
 //
 export function randomlySelect(...args: any): any {
-    return args[Math.round(Math.random()*args.length)];
+    return args[Math.floor(Math.random()*args.length)];
 }

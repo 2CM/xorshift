@@ -59,20 +59,7 @@ client.on("interactionCreate", async (interaction) => {
 client.on("messageCreate", (message) => {
     if(message.author.bot) return;
 
-    /*
-    if(message.content.includes(">play star spangled banner")) { //dont ask
-        message.reply(">:(\n-iain");
-    }
-    */
-
     messageFilter.filterMessage(message);
-
-    /*
-    //to init commands in message's server
-    if(message.content == "owo init commands" && message.author.id == dotenv.adminId) {
-        message.reply("owo")
-    }
-    */
 })
 
 client.login(dotenv.token);
